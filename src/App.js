@@ -1,14 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { AppShell, Badge, Button, Burger, Space, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
+
 
 function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [opened, { toggle }] = useDisclosure();
+
+  const {
+    loginWithRedirect,
+    logout,
+    user,
+    isAuthenticated,
+    isLoading,
+  } = useAuth0();
+
+  const fakeData = {
+    timeFrame: '30',
+    movements: ['deadlift', 'pushups', 'double-unders'],
+    focus: 'strength'
+
+  };
 
   useEffect(() => {
-    // Replace with your actual API URL
-    axios.get('https://uz45ft8e8h.execute-api.us-west-2.amazonaws.com')
+    // Ensure the user is authenticated before making the request
+    if (isAuthenticated && user.email) {
+      setLoading(true)
+      axios.get('https://uz45ft8e8h.execute-api.us-west-2.amazonaws.com',  {
+        params: fakeData,
+        headers: {
+          'user': JSON.stringify(user),  // Add your custom header here
+        }
+      })
       .then(response => {
         setData(response.data);  // Store the response data
         setLoading(false);
@@ -17,10 +45,11 @@ function App() {
         setError(error.message);  // Handle any errors
         setLoading(false);
       });
-  }, []);
+    }
+  }, [isAuthenticated, user]); // Add dependencies for re-running effect when they change
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <div>Loading....</div>;
   }
 
   if (error) {
@@ -28,38 +57,45 @@ function App() {
   }
 
   return (
+    !isAuthenticated ? (
+      <HomePageUnAuth />
+    ) : (
     <div>
-      <h1>{data}</h1>
-      {/* TODO: Delete me */}
-      <h1>30-Minute Workout</h1>
-  <p>Here's a 30-minute workout incorporating box jumps and double unders. Make sure to warm up properly before starting!</p>
-  
-  <h2>Warm-up (5 minutes):</h2>
-  <ul>
-    <li>Light jogging/jumping jacks (2 min)</li>
-    <li>10 arm circles (forward and backward)</li>
-    <li>10 leg swings (each leg)</li>
-    <li>10 bodyweight squats</li>
-    <li>Practice a few box jumps and double unders at lower intensity</li>
-  </ul>
-
-  <h2>Workout (20 minutes):</h2>
-  <p>Complete 5 rounds of:</p>
-  <ul>
-    <li>10 box jumps (use appropriate box height - start conservative)</li>
-    <li>30 double unders</li>
-    <li>15 push-ups</li>
-    <li>20 air squats</li>
-  </ul>
-  <p>Rest 1 minute between rounds.</p>
-
-  <h3>If double unders are too challenging, substitute with:</h3>
-  <ul>
-    <li>90 single unders</li>
-    <li>OR 45 single unders + 15 attempted double unders</li>
-  </ul>
+         <AppShell
+      header={{ height: 60 }}
+      navbar={{
+        width: 300,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
+      padding="md"
+    >
+      <AppShell.Header>
+      <Burger
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom="l"
+          size="l"
+        />
+      </AppShell.Header>
+      <AppShell.Navbar p="md">
+        <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
+      <Button onClick={() => logout()}>Logout</Button>
+       </AppShell.Navbar>
+      <AppShell.Main>
+        {loading? <div>Loading...</div>: 
+      <>
+      <h1>Today's WOD</h1>
+      <Badge color="green">Endurance</Badge>
+      <Badge color="yellow">Skill</Badge>
+      <Space h="md" />
+      <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
+      </>
+        }
+      </AppShell.Main>
+      </AppShell>
     </div>
-  );
+    ));
 }
 
 export default App;
