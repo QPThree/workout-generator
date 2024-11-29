@@ -91,11 +91,41 @@ function App() {
   }
 
   return (
-    !isAuthenticated ? (
-      <HomePageUnAuth />
-    ) : (
-      <HomePageAuth />
-    ));
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{
+        width: 300,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <div style={{ display: "flex" }}>
+          <Burger
+            lineSize={2}
+            size="xl"
+            opened={opened}
+            onClick={toggle}
+            hiddenFrom="sm"
+          />
+          <Space w="l" />
+          <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+        </div>
+      </AppShell.Header>
+      <AppShell.Navbar p="md">
+        {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
+        <AllLinks isAuthed={isAuthenticated} />
+        {isAuthenticated && <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>}
+      </AppShell.Navbar>
+      {!isAuthenticated ? (
+        <HomePageUnAuth />
+      ) : (
+        <HomePageAuth />)
+      }
+    </AppShell>
+
+  );
 }
 
 export default App;

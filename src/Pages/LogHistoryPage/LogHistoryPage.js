@@ -52,23 +52,24 @@ const LogHistoryPage = () => {
 
 
     return (
-        !isAuthenticated ?
-            <HomePageUnAuth /> :
-            isLoading ? "Loading" :
-                <AppShell
-                    header={{ height: 60 }}
-                    navbar={{
-                        width: 300,
-                        breakpoint: 'sm',
-                        collapsed: { mobile: !opened },
-                    }}
-                    padding="md"
-                >
-                    <AppShell.Navbar p="md">
-                        <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
-                        <AllLinks />
-                        <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
-                    </AppShell.Navbar>
+        <AppShell
+            header={{ height: 60 }}
+            navbar={{
+                width: 300,
+                breakpoint: 'sm',
+                collapsed: { mobile: !opened },
+            }}
+            padding="md"
+        >
+            <AppShell.Navbar p="md">
+                {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
+                <AllLinks isAuthed={isAuthenticated} />
+                {isAuthenticated && <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>}
+            </AppShell.Navbar>
+            {!isAuthenticated ?
+                <HomePageUnAuth /> :
+                isLoading ? "Loading" :
+
                     <AppShell.Main>
                         <Text size="xl" c='teal'>Your Workout History</Text>
                         {data?.items?.length < 1 && <Text>You do not have any workouts yet</Text>}
@@ -106,7 +107,8 @@ const LogHistoryPage = () => {
                             </SimpleGrid>
                         </Container>
                     </AppShell.Main>
-                </AppShell>
+            }
+        </AppShell>
     )
 
 }
