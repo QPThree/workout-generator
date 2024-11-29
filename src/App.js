@@ -11,9 +11,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [opened, { toggle }] = useDisclosure();
-  const [timeDomain, setTimeDomain] = useState('60')
+  const [timeDomain, setTimeDomain] = useState()
   const [selectedValues, setSelectedValues] = useState({
-  });
+  })
 
   const {
     logout,
@@ -80,7 +80,7 @@ function App() {
   };
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <div>Generating your workout....</div>;
   }
 
   if (error) {
@@ -132,13 +132,13 @@ function App() {
                     <Radio.Group
                       name="favoriteFramework"
                       label="Select your favorite framework/library"
-                      description="This is anonymous"
+                      description="This is required before submitting"
                       withAsterisk
                     >
-                      <Group mt="xs" value={timeDomain ?? '60'} onChange={event => setTimeDomain(event.target.value)}>
-                        <Radio value="10" label="10" />
+                      <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
+                        <Radio checked={timeDomain === '10'} value="10" label="10" />
                         <Radio value="30" label="30" />
-                        <Radio value="60" label="60" />
+                        <Radio checked={timeDomain === '60'} value="60" label="60" />
                         <Radio value="90" label="90" />
                       </Group>
                     </Radio.Group>
@@ -167,8 +167,8 @@ function App() {
                       value={selectedValues.Endurance}
                       onChange={handleSelectChange('Endurance')}
                     />
-
-                    <Button variant="filled" color="teal" onClick={() => handleSubmit()}>Submit</Button>
+                    <Button variant="filled" color="teal" onClick={() => handleSubmit()}
+                      disabled={timeDomain ? false : true}>Submit</Button>
                   </>
                 }
 
