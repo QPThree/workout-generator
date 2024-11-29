@@ -13,7 +13,6 @@ function App() {
   const [opened, { toggle }] = useDisclosure();
 
   const {
-    loginWithRedirect,
     logout,
     user,
     isAuthenticated,
@@ -72,10 +71,11 @@ function App() {
     >
       <AppShell.Header>
       <Burger
+          lineSize={2} 
+          size="xl"
           opened={opened}
           onClick={toggle}
-          hiddenFrom="l"
-          size="l"
+          hiddenFrom="sm"
         />
       </AppShell.Header>
       <AppShell.Navbar p="md">
