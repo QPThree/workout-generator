@@ -228,7 +228,7 @@ function HomePageAuth() {
                                     </Button>
                                     <Space h="xl" />
 
-                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="red">
+                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="red" onClick={() => generateQuickWorkout('strength')}>
                                         Strength Only
                                     </Button>
 
