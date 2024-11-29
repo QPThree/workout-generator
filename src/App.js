@@ -190,22 +190,7 @@ function App() {
                 }
               </Grid.Col>
               <Grid.Col span="content">
-                {Object.keys(selectedValues) &&
-                  <Stack
-                    h={300}
-                    bg="var(--mantine-color-body)"
-                    align="stretch"
-                    justify="center"
-                    gap="md"
-                  >
-                    {Object.keys(selectedValues).map(value => {
-                      if (selectedValues[value]) {
-                        return <Button variant="default">{selectedValues[value]}</Button>
 
-                      }
-
-                    })}
-                  </Stack>}
               </Grid.Col>
             </Grid>
           </AppShell.Main>
