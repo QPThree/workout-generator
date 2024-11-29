@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
+import HomePageAuth from './Pages/HomePage/HomePageAuth';
 import AllLinks from './components/AllLinks';
 import { renderThemeBadges } from './utils/helpers'
 
@@ -93,102 +94,7 @@ function App() {
     !isAuthenticated ? (
       <HomePageUnAuth />
     ) : (
-      <div>
-        <AppShell
-          header={{ height: 60 }}
-          navbar={{
-            width: 300,
-            breakpoint: 'sm',
-            collapsed: { mobile: !opened },
-          }}
-          padding="md"
-        >
-          <AppShell.Header>
-            <div style={{ display: "flex" }}>
-
-
-              <Burger
-                lineSize={2}
-                size="xl"
-                opened={opened}
-                onClick={toggle}
-                hiddenFrom="sm"
-              />
-              <Space w="l" />
-              <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
-            </div>
-
-
-          </AppShell.Header>
-          <AppShell.Navbar p="md">
-            <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
-            <AllLinks />
-            <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
-          </AppShell.Navbar>
-          <AppShell.Main>
-
-            {loading ? <Center maw={1480} h={100} ><Loader color="red" /></Center> :
-              <>
-                {data?.workout ? <h1>Today's WOD</h1> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
-                <div style={{ display: "flex" }}>
-                  {renderThemeBadges(data.themes)}
-                </div>
-
-                <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
-
-                {!data?.workout &&
-                  <>
-                    <h2>Create New WOD</h2>
-                    <Radio.Group
-                      name="timeDomain"
-                      label="Select your time domain"
-                      description="This is required before submitting"
-                      withAsterisk
-                    >
-                      <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
-                        <Radio checked={timeDomain === '10'} value="10" label="10" />
-                        <Radio value="30" label="30" />
-                        <Radio checked={timeDomain === '60'} value="60" label="60" />
-                        <Radio value="90" label="90" />
-                      </Group>
-                    </Radio.Group>
-
-                    <Text>Optional select any of the options below</Text>
-
-                    <Select
-                      label="Barbell movements"
-                      placeholder="Pick value"
-                      data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
-                      value={selectedValues.Barbell}
-                      onChange={handleSelectChange('Barbell')}
-                    />
-                    <Select
-                      label="Skills"
-                      placeholder="Pick value"
-                      data={['double unders', 'handstand pushups', 'muscle ups', 'handstand walks', 'chest-to-bar pullups']}
-                      value={selectedValues.Skills}
-                      onChange={handleSelectChange('Skills')}
-                    />
-
-                    <Select
-                      label="Endurance"
-                      placeholder="Pick value"
-                      data={['rowing', 'running', 'erg biking', 'burpees', 'wall balls']}
-                      value={selectedValues.Endurance}
-                      onChange={handleSelectChange('Endurance')}
-                    />
-                    <Button variant="filled" color="teal" onClick={() => handleSubmit()}
-                      disabled={timeDomain ? false : true}>Submit</Button>
-                  </>
-
-                }
-
-
-              </>
-            }
-          </AppShell.Main>
-        </AppShell>
-      </div >
+      <HomePageAuth />
     ));
 }
 
