@@ -168,9 +168,7 @@ function App() {
                       onChange={handleSelectChange('Endurance')}
                     />
 
-
-
-                    <Button variant="filled" color="green" onClick={() => handleSubmit()}>Submit</Button>
+                    <Button variant="filled" color="teal" onClick={() => handleSubmit()}>Submit</Button>
                   </>
                 }
 
