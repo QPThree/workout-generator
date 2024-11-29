@@ -121,11 +121,13 @@ function App() {
             {loading ? <div>Loading...</div> :
               <>
                 {data?.workout ? <h1>Today's WOD</h1> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
-                {data?.themes?.map((theme, index) => {
-                  const badgeColor = colors[index % colors.length]; // Cycle through colors
-                  return <Badge color={badgeColor} key={index}>{theme}</Badge>;
-                })}
-                <Space h="md" />
+                <div style={{ display: "flex" }}>
+                  {data?.themes?.map((theme, index) => {
+                    const badgeColor = colors[index % colors.length]; // Cycle through colors
+                    return <><Badge color={badgeColor} key={index}>{theme}</Badge>  <Space w="sm" /> </>;
+                  })}
+                </div>
+
                 <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
 
                 {!data?.workout &&
