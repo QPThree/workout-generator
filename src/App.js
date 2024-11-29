@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Burger, Group, Radio, Select, Space, Text } from '@mantine/core';
+import { AppShell, Badge, Button, Burger, Container, Group, Radio, Select, Space, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
 
@@ -109,6 +109,8 @@ function App() {
               onClick={toggle}
               hiddenFrom="sm"
             />
+            <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+
           </AppShell.Header>
           <AppShell.Navbar p="md">
             <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
@@ -118,7 +120,7 @@ function App() {
           <AppShell.Main>
             {loading ? <div>Loading...</div> :
               <>
-                <h1>Today's WOD</h1>
+                {data?.workout ? <h1>Today's WOD</h1> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
                 {data?.themes?.map((theme, index) => {
                   const badgeColor = colors[index % colors.length]; // Cycle through colors
                   return <Badge color={badgeColor} key={index}>{theme}</Badge>;
@@ -148,14 +150,14 @@ function App() {
                     <Select
                       label="Barbell movements"
                       placeholder="Pick value"
-                      data={['Deadlifts', 'Back Squats', 'Cleans', 'Snatches', 'deadlifts']}
+                      data={['seadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
                       value={selectedValues.Barbell}
                       onChange={handleSelectChange('Barbell')}
                     />
                     <Select
                       label="Skills"
                       placeholder="Pick value"
-                      data={['double unders', 'handstand pushups', 'muscle ups']}
+                      data={['double unders', 'handstand pushups', 'muscle ups', 'handstand walks', 'chest-to-bar pullups']}
                       value={selectedValues.Skills}
                       onChange={handleSelectChange('Skills')}
                     />
@@ -163,15 +165,15 @@ function App() {
                     <Select
                       label="Endurance"
                       placeholder="Pick value"
-                      data={['rowing', 'running', 'erg biking']}
+                      data={['rowing', 'running', 'erg biking', 'burpees', 'wall balls']}
                       value={selectedValues.Endurance}
                       onChange={handleSelectChange('Endurance')}
                     />
                     <Button variant="filled" color="teal" onClick={() => handleSubmit()}
                       disabled={timeDomain ? false : true}>Submit</Button>
                   </>
-                }
 
+                }
 
 
               </>
