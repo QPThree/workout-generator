@@ -4,9 +4,12 @@ export const renderThemeBadges = (themes) => {
     const themeColorMap = {
         'strength': 'red',
         'endurance': 'green',
+        'cardio': 'green',
+        'bodyweight': 'yellow',
         'skill': 'yellow',
         'gymnastics': 'blue',
-        'power': 'purple'
+        'power': 'purple',
+        'full-body': 'red'
     };
     const defaultColor = 'grey'
     return themes?.map((theme, index) => {
