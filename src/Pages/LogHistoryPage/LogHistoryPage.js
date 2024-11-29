@@ -69,7 +69,7 @@ const LogHistoryPage = () => {
                         <Text size="xl" c='teal'>Your Workout History</Text>
                         {data?.items?.length < 1 && <Text>You do not have any workouts yet</Text>}
                         <Container mt={80} size="80rem" >
-                            <SimpleGrid cols={3} spacing="xl">
+                            <SimpleGrid cols={1} spacing="xl">
                                 {data?.items?.map(item => {
                                     console.log(item)
                                     return (<Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -94,7 +94,7 @@ const LogHistoryPage = () => {
                                         </Text>
 
                                         <Button color="blue" fullWidth mt="md" radius="md">
-                                            Book classic tour now
+                                            Ignore this button for now (Talking to you Colin)
                                         </Button>
                                     </Card>)
                                 })}
