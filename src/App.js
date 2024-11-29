@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Burger, Container, Group, Radio, Select, Space, Text } from '@mantine/core';
+import { AppShell, Badge, Button, Burger, Center, Loader, Group, Radio, Select, Space, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
 
@@ -80,7 +80,7 @@ function App() {
   };
 
   if (isLoading) {
-    return <div>Generating your workout....</div>;
+    return <Center maw={1480} h={100} ><Loader color="red" /></Center>;
   }
 
   if (error) {
@@ -102,14 +102,20 @@ function App() {
           padding="md"
         >
           <AppShell.Header>
-            <Burger
-              lineSize={2}
-              size="xl"
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-            />
-            <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+            <div style={{ display: "flex" }}>
+
+
+              <Burger
+                lineSize={2}
+                size="xl"
+                opened={opened}
+                onClick={toggle}
+                hiddenFrom="sm"
+              />
+              <Space w="l" />
+              <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+            </div>
+
 
           </AppShell.Header>
           <AppShell.Navbar p="md">
@@ -118,7 +124,7 @@ function App() {
             <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
           </AppShell.Navbar>
           <AppShell.Main>
-            {loading ? <div>Loading...</div> :
+            {loading ? <Center maw={1480} h={100} ><Loader color="red" /></Center> :
               <>
                 {data?.workout ? <h1>Today's WOD</h1> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
                 <div style={{ display: "flex" }}>
