@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { MantineProvider } from '@mantine/core';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Replace with your Auth0 domain and client ID
 const domain = "dev-cslkpjrs07f1l8bo.us.auth0.com"; // e.g., dev-abc123.auth0.com
@@ -20,17 +21,29 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <Router>
       <Auth0Provider
-    domain={domain}
-    clientId={clientId}
-    authorizationParams={{ redirect_uri: redirectUri }}
-    useRefreshTokens={true}
-    cacheLocation="localstorage"
-  >
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-    <App />
-    </MantineProvider>
-    </Auth0Provider>
+        domain={domain}
+        clientId={clientId}
+        authorizationParams={{ redirect_uri: redirectUri }}
+        useRefreshTokens={true}
+        cacheLocation="localstorage"
+      >
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <Routes>
+            <Route path="/" element={<App />} />
+            {/* Home component for the root path */}
+            <Route path="/workoutlog" element={<p>Log here</p>} />
+
+            <Route path="/profile" element={<p>Profile here</p>} />
+            {/* Profile component for the /profile path */}
+
+            {/* You can define more routes as needed */}
+          </Routes>
+
+        </MantineProvider>
+      </Auth0Provider>
+    </Router>
   </React.StrictMode>
 );
 

@@ -14,7 +14,7 @@ const HomePageUnAuth = () => {
   return (
     <div className="unauth-homepage">
       <header>
-      <Button onClick={() => loginWithRedirect()}>Log In</Button>
+        <Button onClick={() => loginWithRedirect()}>Log In</Button>
         <h1>Welcome</h1>
       </header>
 
