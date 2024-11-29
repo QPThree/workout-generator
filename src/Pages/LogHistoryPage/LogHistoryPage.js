@@ -6,6 +6,8 @@ import AllLinks from '../../components/AllLinks';
 import { useDisclosure } from '@mantine/hooks';
 
 import { SimpleGrid } from '@mantine/core';
+import { renderThemeBadges } from '../../utils/helpers'
+import { render } from '@testing-library/react';
 
 const LogHistoryPage = () => {
 
@@ -44,8 +46,6 @@ const LogHistoryPage = () => {
         }
     }, [isAuthenticated, user]);
 
-    const colors = ['red', 'violet', 'indigo', 'yellow', 'teal'];
-
 
     return (
         !isAuthenticated ?
@@ -79,13 +79,13 @@ const LogHistoryPage = () => {
 
                                         <Group justify="space-between" mt="md" mb="xs">
                                             <Text fw={700}>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Text>
-
                                         </Group>
                                         <Group>
-                                            {item.themes.map((theme, index) => {
+                                            {/* {item.themes.map((theme, index) => {
                                                 const badgeColor = colors[index % colors.length]; // Cycle through colors
                                                 return <><Badge color={badgeColor} key={index}>{theme}</Badge> </>;
-                                            })}
+                                            })} */}
+                                            {renderThemeBadges(item.themes)}
 
                                         </Group>
                                         <Text size="sm" c="dimmed">

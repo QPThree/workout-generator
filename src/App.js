@@ -5,6 +5,7 @@ import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, St
 import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
 import AllLinks from './components/AllLinks';
+import { renderThemeBadges } from './utils/helpers'
 
 
 function App() {
@@ -130,10 +131,7 @@ function App() {
               <>
                 {data?.workout ? <h1>Today's WOD</h1> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
                 <div style={{ display: "flex" }}>
-                  {data?.themes?.map((theme, index) => {
-                    const badgeColor = colors[index % colors.length]; // Cycle through colors
-                    return <><Badge color={badgeColor} key={index}>{theme}</Badge>  <Space w="sm" /> </>;
-                  })}
+                  {renderThemeBadges(data.themes)}
                 </div>
 
                 <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
