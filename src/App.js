@@ -149,14 +149,14 @@ function App() {
                       label="Barbell movements"
                       placeholder="Pick value"
                       data={['Deadlifts', 'Back Squats', 'Cleans', 'Snatches', 'deadlifts']}
-                      value={selectedValues.favoriteLibrary2}
+                      value={selectedValues.Barbell}
                       onChange={handleSelectChange('Barbell')}
                     />
                     <Select
                       label="Skills"
                       placeholder="Pick value"
                       data={['double unders', 'handstand pushups', 'muscle ups']}
-                      value={selectedValues.favoriteLibrary3}
+                      value={selectedValues.Skills}
                       onChange={handleSelectChange('Skills')}
                     />
 
@@ -164,7 +164,7 @@ function App() {
                       label="Endurance"
                       placeholder="Pick value"
                       data={['rowing', 'running', 'erg biking']}
-                      value={selectedValues.favoriteLibrary4}
+                      value={selectedValues.Endurance}
                       onChange={handleSelectChange('Endurance')}
                     />
 
