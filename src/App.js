@@ -82,7 +82,7 @@ function App() {
       <AppShell.Navbar p="md">
         <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
         <div>Past Workouts</div>
-      <Button onClick={() => logout()}>Logout</Button>
+      <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>
        </AppShell.Navbar>
       <AppShell.Main>
         {loading? <div>Loading...</div>: 
