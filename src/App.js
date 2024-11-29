@@ -130,8 +130,8 @@ function App() {
                   <>
                     <h2>Create New WOD</h2>
                     <Radio.Group
-                      name="favoriteFramework"
-                      label="Select your favorite framework/library"
+                      name="timeDomain"
+                      label="Select your time domain"
                       description="This is required before submitting"
                       withAsterisk
                     >
