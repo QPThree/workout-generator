@@ -25,7 +25,7 @@ function App() {
     focus: 'strength'
 
   };
-
+  const colors = ['red', 'violet', 'indigo', 'yellow', 'teal'];
   useEffect(() => {
     // Ensure the user is authenticated before making the request
     if (isAuthenticated && user.email) {
@@ -37,6 +37,7 @@ function App() {
         }
       })
       .then(response => {
+        console.log(response)
         setData(response.data);  // Store the response data
         setLoading(false);
       })
@@ -80,14 +81,17 @@ function App() {
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>
+        <div>Past Workouts</div>
       <Button onClick={() => logout()}>Logout</Button>
        </AppShell.Navbar>
       <AppShell.Main>
         {loading? <div>Loading...</div>: 
       <>
       <h1>Today's WOD</h1>
-      <Badge color="green">Endurance</Badge>
-      <Badge color="yellow">Skill</Badge>
+      {data?.themes.map((theme, index) => {
+        const badgeColor = colors[index % colors.length]; // Cycle through colors
+        return <Badge color={badgeColor} key={index}>{theme}</Badge>;
+      })}
       <Space h="md" />
       <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
       </>
