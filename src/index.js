@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LogHistoryPage from './Pages/LogHistoryPage/LogHistoryPage';
 
 // Replace with your Auth0 domain and client ID
 const domain = "dev-cslkpjrs07f1l8bo.us.auth0.com"; // e.g., dev-abc123.auth0.com
@@ -15,9 +16,6 @@ const redirectUri = window.location.origin; // Redirect URL after login (default
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-
-
 
 root.render(
   <React.StrictMode>
@@ -33,7 +31,7 @@ root.render(
           <Routes>
             <Route path="/" element={<App />} />
             {/* Home component for the root path */}
-            <Route path="/workoutlog" element={<p>Log here</p>} />
+            <Route path="/workoutlog" element={<LogHistoryPage />} />
 
             <Route path="/profile" element={<p>Profile here</p>} />
             {/* Profile component for the /profile path */}
