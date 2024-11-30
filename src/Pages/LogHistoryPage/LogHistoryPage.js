@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Card, Container, Image, Text, Badge, Button, Group, Space } from '@mantine/core';
+import { AppShell, Card, Container, Image, Text, Title, Badge, Button, Group, Space } from '@mantine/core';
 import AllLinks from '../../components/AllLinks';
 import { useDisclosure } from '@mantine/hooks';
 import { SimpleGrid } from '@mantine/core';
@@ -29,10 +29,11 @@ const LogHistoryPage = () => {
         if (isAuthenticated && user.email) {
             setLoading(true)
             axios.get('https://s189gjihg5.execute-api.us-west-2.amazonaws.com', {
-                params: {},
+                params: { 'user': JSON.stringify(user), },
                 headers: {
                     'user': JSON.stringify(user),  // Add your custom header here
-                }
+                },
+                body: { 'body': "body1" }
             })
                 .then(response => {
                     console.log(response)
@@ -46,9 +47,9 @@ const LogHistoryPage = () => {
         }
     }, [isAuthenticated, user]);
 
-    // if (isLoading || loading) {
-    //     return <LoadingPage />
-    // }
+    if (isLoading || loading) {
+        return <LoadingPage />
+    }
 
 
     return (
@@ -71,19 +72,21 @@ const LogHistoryPage = () => {
                 isLoading ? "Loading" :
 
                     <AppShell.Main>
-                        <Text size="xl" c='teal'>Your Workout History</Text>
+                        <Title c='#5474B4'>Your Workout History</Title>
                         {data?.items?.length < 1 && <Text>You do not have any workouts yet</Text>}
                         <Container mt={80} size="80rem" >
                             <SimpleGrid cols={1} spacing="xl">
                                 {data?.items?.map(item => {
-                                    console.log(item)
-                                    return (<Card shadow="sm" padding="lg" radius="md" withBorder>
+
+                                    return (<Card shadow="m" padding="lg" radius="md" withBorder>
                                         <Card.Section>
-                                            {item.date}
+                                            <div style={{ display: 'flex', padding: '1rem', justifyContent: 'flex-end' }}>
+                                                <Text size="m" c="dimmed" > {item.date}</Text>
+                                            </div>
                                         </Card.Section>
 
                                         <Group justify="space-between" mt="md" mb="xs">
-                                            <Text fw={700}>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Text>
+                                            <Title>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Title>
                                         </Group>
                                         <Group>
 

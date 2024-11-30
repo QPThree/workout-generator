@@ -8,6 +8,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LogHistoryPage from './Pages/LogHistoryPage/LogHistoryPage';
+import AdminPage from './Pages/AdminPage/AdminPage'
 
 // Replace with your Auth0 domain and client ID
 const domain = "dev-cslkpjrs07f1l8bo.us.auth0.com"; // e.g., dev-abc123.auth0.com
@@ -37,6 +38,7 @@ root.render(
             {/* Profile component for the /profile path */}
 
             {/* You can define more routes as needed */}
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
 
         </MantineProvider>

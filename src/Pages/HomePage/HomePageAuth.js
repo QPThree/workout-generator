@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Container } from '@mantine/core';
+import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, TypographyStylesProvider, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import HomePageUnAuth from './HomePageUnAuth'
-import AllLinks from '../../components/AllLinks'
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import { Tabs, rem } from '@mantine/core';
@@ -121,7 +119,9 @@ function HomePageAuth() {
                     <div style={{ display: "flex" }}>
                         {renderThemeBadges(data?.themes)}
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
+                    <TypographyStylesProvider>
+                        <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
+                    </TypographyStylesProvider>
                     {!data.workout &&
                         <Tabs defaultValue="custom">
 
