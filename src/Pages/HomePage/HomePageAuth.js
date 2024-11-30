@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Title, TypographyStylesProvider, Container } from '@mantine/core';
+import { AppShell, Badge, Button, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Title, TypographyStylesProvider, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
@@ -112,7 +112,7 @@ function HomePageAuth() {
     }
 
     return (
-        <AppShell.Main>
+        <>
             {loading ? <Center maw={1480} h={100} ><Loader color="red" /></Center> :
                 <>
                     {data?.workout ? <Title>Today's WOD</Title> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
@@ -220,7 +220,7 @@ function HomePageAuth() {
 
                 </>
             }
-        </AppShell.Main>
+        </>
     )
 }
 export default HomePageAuth;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Burger, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Container } from '@mantine/core';
+import { AppShell, Badge, Button, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
 import HomePageAuth from './Pages/HomePage/HomePageAuth';
@@ -91,29 +91,16 @@ function App() {
   }
 
   return (
-    <AppShell
-      header={{ height: 60 }}
-      navbar={{
-        width: 300,
-        breakpoint: 'sm',
-        collapsed: { mobile: !opened },
-      }}
-      padding="md"
-    >
-      <Header />
-      <AppShell.Navbar p="md">
-        {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
-        <AllLinks isAuthed={isAuthenticated} />
-        {isAuthenticated && <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>}
-      </AppShell.Navbar>
-      {!isAuthenticated ? (
-        <HomePageUnAuth />
-      ) : (
-        <HomePageAuth />)
-      }
-    </AppShell>
 
-  );
+    !isAuthenticated ? (
+      <HomePageUnAuth />
+    ) : (
+      <HomePageAuth />)
+  )
+
+
+
+
 }
 
 export default App;

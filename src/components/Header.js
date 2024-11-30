@@ -3,9 +3,9 @@ import { AppShell, Text, Button, Title, Progress, Space, Burger } from '@mantine
 import { useDisclosure } from '@mantine/hooks';
 
 
-const Header = () => {
+const Header = ({ opened, toggle }) => {
 
-    const [opened, { toggle }] = useDisclosure();
+    // const [opened, { toggle }] = useDisclosure();
 
     return (
         <AppShell.Header>
@@ -18,7 +18,9 @@ const Header = () => {
                     hiddenFrom="sm"
                 />
                 <Space w="l" />
-                <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+                <div style={{ display: "flex", justifyContent: 'flex-end', paddingLeft: "2.5%", paddingTop: "10px" }}>
+                    <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
+                </div>
             </div>
         </AppShell.Header>
     )

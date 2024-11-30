@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AppShell, Card, Container, Image, Text, Title, Badge, Button, Group, Space } from '@mantine/core';
-import AllLinks from '../../components/AllLinks';
 import { useDisclosure } from '@mantine/hooks';
 import { SimpleGrid } from '@mantine/core';
 import { renderThemeBadges } from '../../utils/helpers';
@@ -17,7 +16,6 @@ const LogHistoryPage = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [opened, { toggle }] = useDisclosure();
 
     const {
         logout,
@@ -55,62 +53,52 @@ const LogHistoryPage = () => {
 
 
     return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: 'sm',
-                collapsed: { mobile: !opened },
-            }}
-            padding="md"
-        >
-            <Header />
-            <NavBar />
+        <>
             {!isAuthenticated ?
                 <HomePageUnAuth /> :
                 isLoading ? "Loading" :
-
-                    <AppShell.Main>
+                    <>
                         <Title c='#5474B4'>Your Workout History</Title>
                         {data?.items?.length < 1 && <Text>You do not have any workouts yet</Text>}
-                        <Container mt={80} size="80rem" >
-                            <SimpleGrid cols={1} spacing="xl">
-                                {data?.items?.map(item => {
+                        {/* <Container mt={80} size="80rem" > */}
+                        <SimpleGrid cols={1} spacing="xl">
+                            {data?.items?.map(item => {
 
-                                    return (<Card shadow="m" padding="lg" radius="md" withBorder>
-                                        <Card.Section>
-                                            <div style={{ display: 'flex', padding: '1rem', justifyContent: 'flex-end' }}>
-                                                <Text size="m" c="dimmed" > {item.date}</Text>
-                                            </div>
-                                        </Card.Section>
+                                return (<Card shadow="m" padding="lg" radius="md" withBorder>
+                                    <Card.Section>
+                                        <div style={{ display: 'flex', padding: '1rem', justifyContent: 'flex-end' }}>
+                                            <Text size="m" c="dimmed" > {item.date}</Text>
+                                        </div>
+                                    </Card.Section>
 
-                                        <Group justify="space-between" mt="md" mb="xs">
-                                            <Title>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Title>
-                                        </Group>
-                                        <Group>
+                                    <Group justify="space-between" mt="md" mb="xs">
+                                        <Title>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Title>
+                                    </Group>
+                                    <Group>
 
-                                            {renderThemeBadges(item.themes)}
+                                        {renderThemeBadges(item.themes)}
 
-                                        </Group>
-                                        <Text size="sm" c="dimmed">
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: item.workout.replace(/<h1>.*?<\/h1>/, '')
-                                                }}
-                                            />
+                                    </Group>
+                                    <Text size="sm" c="dimmed">
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: item.workout.replace(/<h1>.*?<\/h1>/, '')
+                                            }}
+                                        />
 
-                                        </Text>
+                                    </Text>
 
-                                        <Button color="blue" fullWidth mt="md" radius="md">
-                                            Ignore this button for now (Talking to you Colin)
-                                        </Button>
-                                    </Card>)
-                                })}
-                            </SimpleGrid>
-                        </Container>
-                    </AppShell.Main>
+                                    <Button color="blue" fullWidth mt="md" radius="md">
+                                        Ignore this button for now (Talking to you Colin)
+                                    </Button>
+                                </Card>)
+                            })}
+                        </SimpleGrid>
+                        {/* </Container> */}
+                    </>
+
             }
-        </AppShell>
+        </ >
     )
 
 }

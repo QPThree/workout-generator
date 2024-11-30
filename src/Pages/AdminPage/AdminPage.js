@@ -49,39 +49,26 @@ const AdminPage = () => {
 
 
     return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: 'sm',
-                collapsed: { mobile: !opened },
-            }}
-            padding="md"
-        >
-            <Header />
-            <NavBar />
+        <>
             {!isAuthenticated ?
                 <HomePageUnAuth /> :
                 isLoading ? <LoadingPage /> :
 
-                    <AppShell.Main>
-                        <Title c='#5474B4'>Admin Page</Title>
-                        {data &&
-                            <>
-                                <Text>Total Workouts Generated: {data.total_items}</Text>
-                                <Progress color="yellow" value={data.total_items} />
-                                <Space h='m' />
-                                <Text c='black'>Total Unique Users: {data.unique_partition_keys}</Text>
-
-                                <Progress color="teal" value={data.unique_partition_keys} />
-                            </>
-                        }
-
-                    </AppShell.Main>
+                    <Title c='#5474B4'>Admin Page</Title>
             }
-        </AppShell>
-    )
 
+            {data &&
+                <>
+                    <Text>Total Workouts Generated: {data.total_items}</Text>
+                    <Progress color="yellow" value={data.total_items} />
+                    <Space h='m' />
+                    <Text c='black'>Total Unique Users: {data.unique_partition_keys}</Text>
+
+                    <Progress color="teal" value={data.unique_partition_keys} />
+                </>
+            }
+        </>
+    )
 }
 
 export default AdminPage;
