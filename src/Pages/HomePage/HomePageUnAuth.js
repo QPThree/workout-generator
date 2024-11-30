@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AppShell, Button, Card, Grid, Center, Text, Title, Space, Stack, Container } from '@mantine/core';
+import { AppShell, Button, Card, Grid, Center, List, Text, Title, Space, Stack, Container } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
-import { IconBarbell } from '@tabler/icons-react'
+import { IconBarbell, IconRun, IconTimeDuration30 } from '@tabler/icons-react'
 
 const HomePageUnAuth = () => {
   const {
@@ -12,7 +12,7 @@ const HomePageUnAuth = () => {
     isLoading,
   } = useAuth0();
 
-  const firstContainerProps = {
+  const mainContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
     h: '70vh',
     mt: 'md',
@@ -21,7 +21,7 @@ const HomePageUnAuth = () => {
 
   const secondContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
-    h: '70vh',
+    h: '120vh',
     mt: 'md',
   };
 
@@ -29,11 +29,11 @@ const HomePageUnAuth = () => {
 
     <div className="unauth-homepage">
 
-
-      <Container size="md" {...firstContainerProps}>
+      {/*  - - - - -  MAIN CARD  - - - -  */}
+      <Container size="md" {...mainContainerProps}>
         <Center>
           <Stack
-            h={500}
+            h={600}
             align="stretch"
             justify="center"
             gap="md"
@@ -43,7 +43,7 @@ const HomePageUnAuth = () => {
             <Space h="md" />
             <Grid>
               <Grid.Col span={4}>
-                <IconBarbell size={120} />
+                <IconBarbell size={120} stroke={1.5} />
               </Grid.Col>
               <Grid.Col span={8}>
                 <Text fw={500}>
@@ -51,15 +51,8 @@ const HomePageUnAuth = () => {
                 </Text>
               </Grid.Col>
             </Grid>
-
-
-
             <Space w="sm" />
-
-
-
             <Space h="md" />
-
             <Button onClick={() => loginWithRedirect()}>Log In</Button>
           </Stack>
         </Center>
@@ -67,23 +60,74 @@ const HomePageUnAuth = () => {
       </Container>
 
 
+      {/* - - - - - -  FEATURE CARDS - - - - - - */}
+
       <Container size="md" {...secondContainerProps}>
+        <Title>Features</Title>
+        <Space h="lg" />
+        <Card>
+          <Card.Section>
+            <Center>
+              <Text size="xl">Selectable Movements</Text>
+            </Center>
+          </Card.Section>
+          <Space h="sm" />
 
-        <Title>Feaatures</Title>
-        <Card>Feat 1</Card>
+          <Center>
+            <Text>
+              Select up to 3 movements or modalities that you would like your workout to incldue. Options include barbell movements (deadlifts, squats, snatches, olympics lifts), endurance modalities (running, rowing, biking), and skill based movements (muscle ups, pull ups, handstand walks, and more)</Text>
+          </Center>
+          <Center>
+            <IconRun size={80} stroke={1.5} />
+          </Center>
+
+        </Card>
         <Space h="md" />
-        <Card>Feat 2</Card>
+        <Card>
+          <Card.Section>
+            <Center>
+              <Text size="xl">Quick Create</Text>
+            </Center>
+          </Card.Section>
+          <Space h="sm" />
+
+          <Center>
+            <Text>
+              Staying in a hotel? Use the quick create option to generate workout that fits your equipment availability. Want just a quick strength training session? Select our strength training quick create. And more!
+            </Text>
+          </Center>
+          <Center>
+            <IconTimeDuration30 size={80} stroke={1.5} />
+          </Center>
+        </Card>
         <Space h="md" />
-
-
-        <Card>Feat 3</Card>
+        <Card>
+          <Card.Section>
+            <Center>
+              <Text size="xl">
+                More features to come! Including:
+              </Text>
+            </Center>
+          </Card.Section>
+          <Space h="sm" />
+          <Center>
+            <Space h="sm" />
+            <List>
+              <List.Item>Workout types like AMRAP, For Time, EMOMs, Tatbatas</List.Item>
+              <List.Item>Injury considerations: Can't do certain movements? Include them in your considerations</List.Item>
+              <List.Item>Score inputs</List.Item>
+              <List.Item>More...</List.Item>
+            </List>
+          </Center>
+          <Center>
+            <IconTimeDuration30 size={80} stroke={1.5} />
+          </Center>
+        </Card>
       </Container>
-      <Text>
-        I use a 3rd party authentication library. I will only see / access your name and email so we can track your workouts. Enjoy!
-      </Text>
+
 
       <footer>
-        <p>© 2024 My App. All Rights Reserved.</p>
+        <p>© 2024 Cain Corporated. All Rights Reserved.</p>
       </footer>
     </div >
   );
