@@ -19,9 +19,16 @@ const LayoutComponent = ({ children }) => {
             <Header opened={opened} toggle={toggle} />
             <NavBar />
             <AppShell.Main>
-                {children}
+                <div style={{
+                    // fontFamily: 'Arial, sans- serif'
+                    fontFamily: 'Apercu',
+                    color: '#333333'
+                }}>
+                    {children}
+                </div>
+
             </AppShell.Main>
-        </AppShell>
+        </AppShell >
 
 
     )
