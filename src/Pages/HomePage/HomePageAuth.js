@@ -6,7 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import { Tabs, rem } from '@mantine/core';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { IconPhoto, IconAdjustments, IconClockBolt, IconExclamationMark } from '@tabler/icons-react';
 
 
 
@@ -129,13 +129,13 @@ function HomePageAuth() {
                     {!data?.workout &&
                         <Tabs defaultValue="custom">
                             <Tabs.List>
-                                <Tabs.Tab value="custom" leftSection={<IconPhoto style={iconStyle} />}>
-                                    Custom
+                                <Tabs.Tab value="custom" leftSection={<IconAdjustments style={iconStyle} />}>
+                                    Custom Workout
                                 </Tabs.Tab>
-                                <Tabs.Tab value="quick generate" leftSection={<IconMessageCircle style={iconStyle} />}>
-                                    Quick Generate
+                                <Tabs.Tab value="quick generate" leftSection={<IconClockBolt style={iconStyle} />}>
+                                    Quick Create
                                 </Tabs.Tab>
-                                <Tabs.Tab value="future options" leftSection={<IconSettings style={iconStyle} />}>
+                                <Tabs.Tab value="future options" leftSection={<IconExclamationMark style={iconStyle} />}>
                                     Future Options
                                 </Tabs.Tab>
                             </Tabs.List>
