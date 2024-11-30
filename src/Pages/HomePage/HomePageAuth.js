@@ -175,6 +175,7 @@ function HomePageAuth() {
                                         value={selectedValues.Endurance}
                                         onChange={handleSelectChange('Endurance')}
                                     />
+                                    <Space h="md" />
                                     <Button variant="filled" color="teal" onClick={() => handleSubmit()}
                                         disabled={timeDomain ? false : true}>Submit</Button>
                                 </>

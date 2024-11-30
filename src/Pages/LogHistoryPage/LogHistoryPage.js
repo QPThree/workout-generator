@@ -87,7 +87,6 @@ const LogHistoryPage = () => {
                                         />
 
                                     </Text>
-
                                     <Button color="blue" fullWidth mt="md" radius="md">
                                         Ignore this button for now (Talking to you Colin)
                                     </Button>
