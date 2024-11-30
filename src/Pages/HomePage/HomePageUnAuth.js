@@ -14,8 +14,8 @@ const HomePageUnAuth = () => {
 
   const mainContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
-    h: '80vh',
-    mt: 'md',
+    h: '60vh',
+    mt: 'sm',
     // px: "20px"
   };
 
@@ -37,18 +37,16 @@ const HomePageUnAuth = () => {
   return (
 
     <div className="unauth-homepage">
-
       {/*  - - - - -  MAIN CARD  - - - -  */}
       <Container size="md" {...mainContainerProps}>
         <Center>
           <Stack
             h={600}
             align="stretch"
-            justify="center"
+            justify="flex-start"
             gap="md"
           >
             <Title><Text span c="blue" inherit>Welcome to Colin's Lazy Generator.</Text></Title>
-            <Space h="md" />
             <Space h="md" />
             <Grid>
               <Grid.Col span={4}>
