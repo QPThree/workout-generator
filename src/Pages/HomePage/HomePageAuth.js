@@ -29,7 +29,7 @@ function HomePageAuth() {
     } = useAuth0();
 
 
-    const colors = ['red', 'violet', 'indigo', 'yellow', 'teal'];
+
     useEffect(() => {
         // Ensure the user is authenticated before making the request
         if (isAuthenticated && user.email) {
