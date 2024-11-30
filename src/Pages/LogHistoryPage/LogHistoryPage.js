@@ -9,6 +9,7 @@ import HomePageUnAuth from '../HomePage/HomePageUnAuth';
 import LoadingPage from '../LoadingPage/LoadingPage'
 import NavBar from '../../components/NavBar';
 import Header from '../../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const LogHistoryPage = () => {
 
@@ -16,6 +17,8 @@ const LogHistoryPage = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     const {
         logout,
@@ -47,6 +50,11 @@ const LogHistoryPage = () => {
         }
     }, [isAuthenticated, user]);
 
+    const handleRedirect = (workoutId) => {
+        console.log("Redirecting...");
+        navigate(`/viewworkout/${workoutId}`);  // Replace '/new-page' with your target route
+    };
+
     if (isLoading || loading) {
         return <LoadingPage />
     }
@@ -64,31 +72,28 @@ const LogHistoryPage = () => {
                         <SimpleGrid cols={1} spacing="xl">
                             {data?.items?.map(item => {
 
-                                return (<Card shadow="m" padding="lg" radius="md" withBorder>
+                                return (<Card shadow="m" padding="md" radius="md" withBorder>
                                     <Card.Section>
                                         <div style={{ display: 'flex', padding: '1rem', justifyContent: 'flex-end' }}>
                                             <Text size="m" c="dimmed" > {item.date}</Text>
                                         </div>
                                     </Card.Section>
-
                                     <Group justify="space-between" mt="md" mb="xs">
                                         <Title>{item.workout.match(/<h1>(.*?)<\/h1>/)[1]}</Title>
                                     </Group>
                                     <Group>
-
                                         {renderThemeBadges(item.themes)}
-
                                     </Group>
-                                    <Text size="sm" c="dimmed">
+                                    {/* <Text size="sm" c="dimmed">
                                         <div
                                             dangerouslySetInnerHTML={{
                                                 __html: item.workout.replace(/<h1>.*?<\/h1>/, '')
                                             }}
                                         />
 
-                                    </Text>
-                                    <Button color="blue" fullWidth mt="md" radius="md">
-                                        Ignore this button for now (Talking to you Colin)
+                                    </Text> */}
+                                    <Button color="yellow" variant='outline' fullWidth mt="md" radius="md" onClick={() => handleRedirect(item.date)}>
+                                        See full workout
                                     </Button>
                                 </Card>)
                             })}

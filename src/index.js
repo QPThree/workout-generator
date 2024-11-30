@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LogHistoryPage from './Pages/LogHistoryPage/LogHistoryPage';
 import AdminPage from './Pages/AdminPage/AdminPage'
 import LayoutComponent from './components/LayoutComponent';
+import WorkoutViewPage from './Pages/WorkoutViewPage/WorkoutViewPage'
 
 // Replace with your Auth0 domain and client ID
 const domain = "dev-cslkpjrs07f1l8bo.us.auth0.com"; // e.g., dev-abc123.auth0.com
@@ -41,6 +42,8 @@ root.render(
 
               {/* You can define more routes as needed */}
               <Route path="/admin" element={<AdminPage />} />
+
+              <Route path="/viewworkout/:workoutId" element={<WorkoutViewPage />} />
             </Routes>
           </LayoutComponent>
         </MantineProvider>
