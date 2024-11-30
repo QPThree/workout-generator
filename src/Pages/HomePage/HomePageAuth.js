@@ -50,7 +50,7 @@ function HomePageAuth() {
                     setLoading(false);
                 });
         }
-    }, [isAuthenticated, user]); // Add dependencies for re-running effect when they change
+    }, [user]); // Add dependencies for re-running effect when they change
 
     // Handle the change for each Select
     const handleSelectChange = (fieldName) => (value) => {
@@ -62,9 +62,8 @@ function HomePageAuth() {
     };
 
     // Send the selected values to the backend
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Send selectedValues as a list or in the format expected by the backend
-
         setLoading(true)
         const valuesToSend = selectedValues
         valuesToSend['timeDomain'] = timeDomain
@@ -122,7 +121,7 @@ function HomePageAuth() {
                     <TypographyStylesProvider>
                         <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
                     </TypographyStylesProvider>
-                    {!data.workout &&
+                    {!data?.workout &&
                         <Tabs defaultValue="custom">
                             <Tabs.List>
                                 <Tabs.Tab value="custom" leftSection={<IconPhoto style={iconStyle} />}>
