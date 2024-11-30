@@ -113,9 +113,9 @@ function HomePageAuth() {
         <>
             {loading ? (
                 <Center maw={1480} h={100} >
-                    <Loader color="red" />
+                    <Loader color="black" />
                     <Space h="md" />
-                    <Text c='#e64f57'>Generating workout this may take a moment...</Text>
+                    <Text c='black'>Generating workout this may take a moment...</Text>
                 </Center>
             ) :
                 <>
@@ -126,6 +126,7 @@ function HomePageAuth() {
                     <TypographyStylesProvider>
                         <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
                     </TypographyStylesProvider>
+                    {/* This below is the custom create component */}
                     {!data?.workout &&
                         <Tabs defaultValue="custom">
                             <Tabs.List>
