@@ -15,11 +15,11 @@ export const renderThemeBadges = (themes) => {
     const defaultColor = 'grey'
     return (
         <Stack
-            h={300}
+            h={150}
             bg="var(--mantine-color-body)"
             align="stretch"
             justify="center"
-            gap="md"
+            gap="xs"
         >
             {themes?.map((theme, index) => {
                 // Use the predefined color for a theme if it exists, otherwise use the default color
