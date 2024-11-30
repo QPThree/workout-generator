@@ -109,12 +109,17 @@ function HomePageAuth() {
     if (error) {
         return <ErrorPage />
     }
-
     return (
         <>
-            {loading ? <Center maw={1480} h={100} ><Loader color="red" /></Center> :
+            {loading ? (
+                <Center maw={1480} h={100} >
+                    <Loader color="red" />
+                    <Space h="md" />
+                    <Text c='#e64f57'>Generating workout this may take a moment...</Text>
+                </Center>
+            ) :
                 <>
-                    {data?.workout ? <Title>Today's WOD</Title> : <Text c="red.6">No workout created. Use options below to generate a desired workout.</Text>}
+                    {data?.workout ? <Title>Today's WOD</Title> : <Text c="#c91a25">No workout created. Use options below to generate a desired workout.</Text>}
                     {/* <div style={{ display: "flex" }}> */}
                     {renderThemeBadges(data?.themes)}
 

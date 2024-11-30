@@ -23,7 +23,7 @@ export const renderThemeBadges = (themes) => {
         >
             {themes?.map((theme, index) => {
                 // Use the predefined color for a theme if it exists, otherwise use the default color
-                const badgeColor = themeColorMap[theme] || defaultColor;
+                const badgeColor = themeColorMap[theme.toLowerCase()] || defaultColor;
                 return <Badge color={badgeColor} key={index}>{theme}</Badge>
 
             })}

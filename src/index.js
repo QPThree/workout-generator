@@ -29,7 +29,7 @@ root.render(
         useRefreshTokens={true}
         cacheLocation="localstorage"
       >
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider>
           <LayoutComponent >
             <Routes>
               <Route path="/" element={<App />} />
