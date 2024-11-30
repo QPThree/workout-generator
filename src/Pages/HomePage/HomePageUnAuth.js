@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppShell, Button, Card, Grid, Center, List, Text, Title, Space, Stack, Container } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
-import { IconBarbell, IconRun, IconTimeDuration30 } from '@tabler/icons-react'
+import { IconBarbell, IconRun, IconTimeDuration30, IconCirclePlus } from '@tabler/icons-react'
 
 const HomePageUnAuth = () => {
   const {
@@ -24,6 +24,15 @@ const HomePageUnAuth = () => {
     h: '120vh',
     mt: 'md',
   };
+
+  const cardProps = {
+    bg: 'cream',
+    c: 'black'
+  }
+
+  const iconProps = {
+    c: "#d9d02f"
+  }
 
   return (
 
@@ -65,7 +74,7 @@ const HomePageUnAuth = () => {
       <Container size="md" {...secondContainerProps}>
         <Title>Features</Title>
         <Space h="lg" />
-        <Card>
+        <Card bg={cardProps.bg} withBorder c={cardProps.c}>
           <Card.Section>
             <Center>
               <Text size="xl">Selectable Movements</Text>
@@ -78,12 +87,14 @@ const HomePageUnAuth = () => {
               Select up to 3 movements or modalities that you would like your workout to incldue. Options include barbell movements (deadlifts, squats, snatches, olympics lifts), endurance modalities (running, rowing, biking), and skill based movements (muscle ups, pull ups, handstand walks, and more)</Text>
           </Center>
           <Center>
-            <IconRun size={80} stroke={1.5} />
+            <IconRun size={80} stroke={1.5} color={iconProps.c} />
           </Center>
 
         </Card>
         <Space h="md" />
-        <Card>
+
+        <Card bg={cardProps.bg} withBorder c={cardProps.c}>
+
           <Card.Section>
             <Center>
               <Text size="xl">Quick Create</Text>
@@ -97,11 +108,12 @@ const HomePageUnAuth = () => {
             </Text>
           </Center>
           <Center>
-            <IconTimeDuration30 size={80} stroke={1.5} />
+            <IconTimeDuration30 size={80} stroke={1.5} color={iconProps.c} />
           </Center>
         </Card>
+
         <Space h="md" />
-        <Card>
+        <Card bg={cardProps.bg} withBorder c={cardProps.c}>
           <Card.Section>
             <Center>
               <Text size="xl">
@@ -120,10 +132,10 @@ const HomePageUnAuth = () => {
             </List>
           </Center>
           <Center>
-            <IconTimeDuration30 size={80} stroke={1.5} />
+            <IconCirclePlus size={80} stroke={1.5} color={iconProps.c} />
           </Center>
         </Card>
-      </Container>
+      </Container >
 
 
       <footer>
