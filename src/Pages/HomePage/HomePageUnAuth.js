@@ -12,16 +12,17 @@ const HomePageUnAuth = () => {
     isLoading,
   } = useAuth0();
 
+  //This is the wolcome box
   const mainContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
     h: '60vh',
     mt: 'sm',
-    // px: "20px"
   };
 
+  //This is the features box
   const secondContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
-    h: '150vh',
+    h: '140vh',
     mt: 'md',
   };
 
