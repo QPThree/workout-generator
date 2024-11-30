@@ -14,7 +14,7 @@ const HomePageUnAuth = () => {
 
   const mainContainerProps = {
     bg: 'var(--mantine-color-blue-light)',
-    h: '70vh',
+    h: '80vh',
     mt: 'md',
     // px: "20px"
   };
