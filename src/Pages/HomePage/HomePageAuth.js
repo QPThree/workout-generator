@@ -119,109 +119,112 @@ function HomePageAuth() {
                 </Center>
             ) :
                 <>
-                    {data?.workout ? <Title>Today's WOD</Title> : <Text c="#c91a25">No workout created. Use options below to generate a desired workout.</Text>}
+                    {data?.workout && <Title>Today's WOD</Title>}
                     {/* <div style={{ display: "flex" }}> */}
-                    {renderThemeBadges(data?.themes)}
+                    {data.workout && renderThemeBadges(data?.themes)}
 
                     <TypographyStylesProvider>
                         <div dangerouslySetInnerHTML={{ __html: data?.workout }} />
                     </TypographyStylesProvider>
                     {/* This below is the custom create component */}
                     {!data?.workout &&
-                        <Tabs defaultValue="custom">
-                            <Tabs.List>
-                                <Tabs.Tab value="custom" leftSection={<IconAdjustments style={iconStyle} />}>
-                                    Custom Workout
-                                </Tabs.Tab>
-                                <Tabs.Tab value="quick generate" leftSection={<IconClockBolt style={iconStyle} />}>
-                                    Quick Create
-                                </Tabs.Tab>
-                                <Tabs.Tab value="future options" leftSection={<IconExclamationMark style={iconStyle} />}>
-                                    Future Options
-                                </Tabs.Tab>
-                            </Tabs.List>
-                            <Tabs.Panel value="custom">
-                                <>
-                                    <h2>Create New WOD</h2>
-                                    <Radio.Group
-                                        name="timeDomain"
-                                        label="Select your time domain"
-                                        description="This is required before submitting"
-                                        withAsterisk
+                        <>
+                            <Text >No workout created. Use options below to generate a desired workout.</Text>
+                            <Tabs defaultValue="custom">
+                                <Tabs.List>
+                                    <Tabs.Tab value="custom" leftSection={<IconAdjustments style={iconStyle} />}>
+                                        Custom Workout
+                                    </Tabs.Tab>
+                                    <Tabs.Tab value="quick generate" leftSection={<IconClockBolt style={iconStyle} />}>
+                                        Quick Create
+                                    </Tabs.Tab>
+                                    <Tabs.Tab value="future options" leftSection={<IconExclamationMark style={iconStyle} />}>
+                                        Future Options
+                                    </Tabs.Tab>
+                                </Tabs.List>
+                                <Tabs.Panel value="custom">
+                                    <>
+                                        <h2>Create New WOD</h2>
+                                        <Radio.Group
+                                            name="timeDomain"
+                                            label="Select your time domain"
+                                            description="This is required before submitting"
+                                            withAsterisk
+                                        >
+                                            <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
+                                                <Radio checked={timeDomain === '10'} value="10" label="10" />
+                                                <Radio value="30" label="30" />
+                                                <Radio checked={timeDomain === '60'} value="60" label="60" />
+                                                <Radio value="90" label="90" />
+                                            </Group>
+                                        </Radio.Group>
+
+                                        <Text>Optional select any of the options below</Text>
+
+                                        <Select
+                                            label="Barbell movements"
+                                            placeholder="Pick value"
+                                            data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
+                                            value={selectedValues.Barbell}
+                                            onChange={handleSelectChange('Barbell')}
+                                        />
+                                        <Select
+                                            label="Skills"
+                                            placeholder="Pick value"
+                                            data={['double unders', 'handstand pushups', 'muscle ups', 'handstand walks', 'chest-to-bar pullups']}
+                                            value={selectedValues.Skills}
+                                            onChange={handleSelectChange('Skills')}
+                                        />
+
+                                        <Select
+                                            label="Endurance"
+                                            placeholder="Pick value"
+                                            data={['rowing', 'running', 'erg biking', 'burpees', 'wall balls']}
+                                            value={selectedValues.Endurance}
+                                            onChange={handleSelectChange('Endurance')}
+                                        />
+                                        <Space h="md" />
+                                        <Button variant="filled" color="teal" onClick={() => handleSubmit()}
+                                            disabled={timeDomain ? false : true}>Submit</Button>
+                                    </>
+                                </Tabs.Panel>
+
+                                <Tabs.Panel value="quick generate">
+                                    <Space h="l" />
+
+                                    <Text>Select an option to generate your daily workout</Text>
+                                    <Space h="xl" />
+                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="yellow" onClick={() => generateQuickWorkout('hotel')}>
+                                        Hotel Workout
+                                    </Button>
+                                    <Space h="xl" />
+
+                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="red" onClick={() => generateQuickWorkout('strength')}>
+                                        Strength Only
+                                    </Button>
+
+                                    <Button justify="center" fullWidth rightSection={icon} variant="default" mt="md">
+                                        Button label
+                                    </Button>
+
+                                    <Button
+                                        justify="center"
+                                        fullWidth
+                                        rightSection={icon}
+                                        leftSection={<span />}
+                                        variant="default"
+                                        mt="md"
                                     >
-                                        <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
-                                            <Radio checked={timeDomain === '10'} value="10" label="10" />
-                                            <Radio value="30" label="30" />
-                                            <Radio checked={timeDomain === '60'} value="60" label="60" />
-                                            <Radio value="90" label="90" />
-                                        </Group>
-                                    </Radio.Group>
+                                        Button label
+                                    </Button>
 
-                                    <Text>Optional select any of the options below</Text>
+                                </Tabs.Panel>
 
-                                    <Select
-                                        label="Barbell movements"
-                                        placeholder="Pick value"
-                                        data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
-                                        value={selectedValues.Barbell}
-                                        onChange={handleSelectChange('Barbell')}
-                                    />
-                                    <Select
-                                        label="Skills"
-                                        placeholder="Pick value"
-                                        data={['double unders', 'handstand pushups', 'muscle ups', 'handstand walks', 'chest-to-bar pullups']}
-                                        value={selectedValues.Skills}
-                                        onChange={handleSelectChange('Skills')}
-                                    />
-
-                                    <Select
-                                        label="Endurance"
-                                        placeholder="Pick value"
-                                        data={['rowing', 'running', 'erg biking', 'burpees', 'wall balls']}
-                                        value={selectedValues.Endurance}
-                                        onChange={handleSelectChange('Endurance')}
-                                    />
-                                    <Space h="md" />
-                                    <Button variant="filled" color="teal" onClick={() => handleSubmit()}
-                                        disabled={timeDomain ? false : true}>Submit</Button>
-                                </>
-                            </Tabs.Panel>
-
-                            <Tabs.Panel value="quick generate">
-                                <Space h="l" />
-
-                                <Text>Select an option to generate your daily workout</Text>
-                                <Space h="xl" />
-                                <Button justify="center" fullWidth leftSection={icon} variant="filled" color="yellow" onClick={() => generateQuickWorkout('hotel')}>
-                                    Hotel Workout
-                                </Button>
-                                <Space h="xl" />
-
-                                <Button justify="center" fullWidth leftSection={icon} variant="filled" color="red" onClick={() => generateQuickWorkout('strength')}>
-                                    Strength Only
-                                </Button>
-
-                                <Button justify="center" fullWidth rightSection={icon} variant="default" mt="md">
-                                    Button label
-                                </Button>
-
-                                <Button
-                                    justify="center"
-                                    fullWidth
-                                    rightSection={icon}
-                                    leftSection={<span />}
-                                    variant="default"
-                                    mt="md"
-                                >
-                                    Button label
-                                </Button>
-
-                            </Tabs.Panel>
-
-                            <Tabs.Panel value="future options">
-                                Settings tab content
-                            </Tabs.Panel>
-                        </Tabs>}
+                                <Tabs.Panel value="future options">
+                                    Settings tab content
+                                </Tabs.Panel>
+                            </Tabs>
+                        </>}
 
 
                 </>
