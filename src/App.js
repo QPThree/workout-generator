@@ -6,7 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import HomePageUnAuth from './Pages/HomePage/HomePageUnAuth'
 import HomePageAuth from './Pages/HomePage/HomePageAuth';
 import AllLinks from './components/AllLinks';
-import { renderThemeBadges } from './utils/helpers'
+import Header from './components/Header';
 
 
 function App() {
@@ -100,19 +100,7 @@ function App() {
       }}
       padding="md"
     >
-      <AppShell.Header>
-        <div style={{ display: "flex" }}>
-          <Burger
-            lineSize={2}
-            size="xl"
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="sm"
-          />
-          <Space w="l" />
-          <Text size="xl" c="blue" fw={1000}>Colin's Lazy Generator</Text>
-        </div>
-      </AppShell.Header>
+      <Header />
       <AppShell.Navbar p="md">
         {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
         <AllLinks isAuthed={isAuthenticated} />

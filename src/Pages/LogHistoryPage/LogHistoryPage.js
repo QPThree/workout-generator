@@ -8,6 +8,8 @@ import { SimpleGrid } from '@mantine/core';
 import { renderThemeBadges } from '../../utils/helpers';
 import HomePageUnAuth from '../HomePage/HomePageUnAuth';
 import LoadingPage from '../LoadingPage/LoadingPage'
+import NavBar from '../../components/NavBar';
+import Header from '../../components/Header';
 
 const LogHistoryPage = () => {
 
@@ -62,11 +64,8 @@ const LogHistoryPage = () => {
             }}
             padding="md"
         >
-            <AppShell.Navbar p="md">
-                {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
-                <AllLinks isAuthed={isAuthenticated} />
-                {isAuthenticated && <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>}
-            </AppShell.Navbar>
+            <Header />
+            <NavBar />
             {!isAuthenticated ?
                 <HomePageUnAuth /> :
                 isLoading ? "Loading" :

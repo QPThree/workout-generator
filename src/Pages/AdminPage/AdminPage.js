@@ -3,9 +3,10 @@ import { AppShell, Text, Button, Title, Progress, Space } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoadingPage from '../LoadingPage/LoadingPage';
-import AllLinks from '../../components/AllLinks';
+import NavBar from '../../components/NavBar'
 import HomePageUnAuth from '../HomePage/HomePageUnAuth';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 const AdminPage = () => {
     const [data, setData] = useState(null);
@@ -57,14 +58,11 @@ const AdminPage = () => {
             }}
             padding="md"
         >
-            <AppShell.Navbar p="md">
-                {isAuthenticated && <Text size="xl" c="blue" fw={700}>Welcome, {user.name.split(" ")[0]} </Text>}
-                <AllLinks isAuthed={isAuthenticated} />
-                {isAuthenticated && <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</Button>}
-            </AppShell.Navbar>
+            <Header />
+            <NavBar />
             {!isAuthenticated ?
                 <HomePageUnAuth /> :
-                isLoading ? "Loading" :
+                isLoading ? <LoadingPage /> :
 
                     <AppShell.Main>
                         <Title c='#5474B4'>Admin Page</Title>
@@ -78,8 +76,6 @@ const AdminPage = () => {
                                 <Progress color="teal" value={data.unique_partition_keys} />
                             </>
                         }
-
-
 
                     </AppShell.Main>
             }
