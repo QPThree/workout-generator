@@ -6,9 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import { Tabs, rem } from '@mantine/core';
-import { IconPhoto, IconAdjustments, IconClockBolt, IconExclamationMark } from '@tabler/icons-react';
-import { useForm } from '@mantine/form';
-import { type } from '@testing-library/user-event/dist/type';
+import { IconAdjustments, IconClockBolt, IconExclamationMark, IconBuildingSkyscraper, IconWeight } from '@tabler/icons-react';
 
 
 
@@ -26,7 +24,6 @@ function HomePageAuth() {
     const [skillMovementsValues, setSkillMovementsValues] = useState([]);
     const [typeValue, setTypeValue] = useState("Random")
     const iconStyle = { width: rem(12), height: rem(12) };
-    const icon = <IconPhoto size={14} />;
 
     const {
         logout,
@@ -143,7 +140,7 @@ function HomePageAuth() {
                     {/* This below is the custom create component */}
                     {!data?.workout &&
                         <>
-                            <Tabs defaultValue="custom">
+                            <Tabs defaultValue="custom" color="gray" orientation="horizontal" variant="outline">
                                 <Tabs.List>
                                     <Tabs.Tab value="custom" leftSection={<IconAdjustments style={iconStyle} />}>
                                         Custom Workout
@@ -151,107 +148,82 @@ function HomePageAuth() {
                                     <Tabs.Tab value="quick generate" leftSection={<IconClockBolt style={iconStyle} />}>
                                         Quick Create
                                     </Tabs.Tab>
-                                    <Tabs.Tab value="future options" leftSection={<IconExclamationMark style={iconStyle} />}>
-                                        Future Options
-                                    </Tabs.Tab>
                                 </Tabs.List>
                                 <Tabs.Panel value="custom">
-                                    <>
-                                        <h2>Create New WOD</h2>
-                                        <Radio.Group
-                                            name="timeDomain"
-                                            label="Select your time domain"
-                                            description="This is required before submitting"
-                                            withAsterisk
-                                        >
-                                            <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
-                                                <Radio checked={timeDomain === '10'} value="10" label="10" />
-                                                <Radio value="30" label="30" />
-                                                <Radio checked={timeDomain === '60'} value="60" label="60" />
-                                                <Radio value="90" label="90" />
+                                    <div style={{ padding: '10px' }}>
+                                        <>
+                                            <h2>Create New WOD</h2>
+                                            <Radio.Group
+                                                name="timeDomain"
+                                                label="Select your time domain"
+                                                description="This is required before submitting"
+                                                withAsterisk
+                                            >
+                                                <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
+                                                    <Radio checked={timeDomain === '10'} value="10" label="10" />
+                                                    <Radio value="30" label="30" />
+                                                    <Radio checked={timeDomain === '60'} value="60" label="60" />
+                                                    <Radio value="90" label="90" />
+                                                </Group>
+                                            </Radio.Group>
+                                            <Space h="sm" />
+                                            <SegmentedControl
+                                                data={['Random', 'AMRAP', 'Timed', 'EMOM']}
+                                                value={typeValue}
+                                                onChange={setTypeValue}
+
+                                            />
+                                            <MultiSelect
+                                                label="Barbell Movements"
+                                                placeholder="Pick value up to 3"
+                                                maxValues={3}
+                                                value={barbellMovementsValues} onChange={setBarbellMovementsValues}
+                                                data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
+                                            />
+
+                                            <MultiSelect
+                                                label="Engine Builders"
+                                                placeholder="Pick value up to 3"
+                                                maxValues={3}
+                                                value={engineBuildersValues} onChange={setEngineBuildersValues}
+                                                data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
+                                            />
+
+                                            <MultiSelect
+                                                label="Skill Movements"
+                                                placeholder="Pick value up to 3"
+                                                maxValues={3}
+                                                value={skillMovementsValues} onChange={setSkillMovementsValues}
+                                                data={['pistol squats', 'chest to bar pullups', 'handstand pushups', 'double-unders']}
+                                            />
+
+                                            <MultiSelect
+                                                label="Advanced Movements"
+                                                value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
+                                                maxValues={3}
+                                                placeholder="Pick value up to 3"
+                                                data={['muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
+
+                                            />
+                                            <Group justify="flex-end" mt="md">
+                                                <Button onClick={event => handleSubmit()} disabled={timeDomain ? false : true}> Submit</Button>
                                             </Group>
-                                        </Radio.Group>
-                                        <Space h="sm" />
-
-                                        <SegmentedControl
-                                            data={['Random', 'AMRAP', 'Timed', 'EMOM']}
-                                            value={typeValue}
-                                            onChange={setTypeValue}
-
-                                        />
-
-                                        <MultiSelect
-                                            label="Barbell Movements"
-                                            placeholder="Pick value up to 3"
-                                            maxValues={3}
-                                            value={barbellMovementsValues} onChange={setBarbellMovementsValues}
-                                            data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
-                                        />
-
-                                        <MultiSelect
-                                            label="Engine Builders"
-                                            placeholder="Pick value up to 3"
-                                            maxValues={3}
-                                            value={engineBuildersValues} onChange={setEngineBuildersValues}
-                                            data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
-                                        />
-
-                                        <MultiSelect
-                                            label="Skill Movements"
-                                            placeholder="Pick value up to 3"
-                                            maxValues={3}
-                                            value={skillMovementsValues} onChange={setSkillMovementsValues}
-                                            data={['pistol squats', 'chest to bar pullups', 'handstand pushups', 'double-unders']}
-                                        />
-
-                                        <MultiSelect
-                                            label="Advanced Movements"
-                                            value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
-                                            maxValues={3}
-                                            placeholder="Pick value up to 3"
-                                            data={['muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
-
-                                        />
-                                        <Group justify="flex-end" mt="md">
-                                            <Button onClick={event => handleSubmit()} disabled={timeDomain ? false : true}> Submit</Button>
-                                        </Group>
-
-                                    </>
+                                        </>
+                                    </div>
                                 </Tabs.Panel>
-
                                 <Tabs.Panel value="quick generate">
                                     <Space h="l" />
 
                                     <Text>Select an option to generate your daily workout</Text>
                                     <Space h="xl" />
-                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="yellow" onClick={() => generateQuickWorkout('hotel')}>
+                                    <Button justify="center" fullWidth leftSection={<IconBuildingSkyscraper size={14} />} variant="filled" color="yellow" onClick={() => generateQuickWorkout('hotel')}>
                                         Hotel Workout
                                     </Button>
                                     <Space h="xl" />
-
-                                    <Button justify="center" fullWidth leftSection={icon} variant="filled" color="red" onClick={() => generateQuickWorkout('strength')}>
+                                    <Button justify="center" fullWidth leftSection={<IconWeight size={14} />} variant="filled" color="red" onClick={() => generateQuickWorkout('strength')}>
                                         Strength Only
                                     </Button>
 
-                                    <Button justify="center" fullWidth rightSection={icon} variant="default" mt="md">
-                                        Button label
-                                    </Button>
-
-                                    <Button
-                                        justify="center"
-                                        fullWidth
-                                        rightSection={icon}
-                                        leftSection={<span />}
-                                        variant="default"
-                                        mt="md"
-                                    >
-                                        Button label
-                                    </Button>
-
-                                </Tabs.Panel>
-
-                                <Tabs.Panel value="future options">
-                                    Settings tab content
                                 </Tabs.Panel>
                             </Tabs>
                         </>}

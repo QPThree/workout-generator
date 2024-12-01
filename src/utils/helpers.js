@@ -8,9 +8,12 @@ export const renderThemeBadges = (themes) => {
         'conditioning': 'green',
         'bodyweight': 'yellow',
         'skill': 'yellow',
+        'skill work': 'yellow',
         'gymnastics': 'blue',
         'power': 'purple',
-        'full-body': 'red'
+        'full-body': 'red',
+        'hotel': 'pink',
+        'hotel-friendly': 'pink'
     };
     const defaultColor = 'grey'
     return (
