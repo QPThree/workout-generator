@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Center, Grid, Loader, Group, Radio, Stack, Select, Space, Text, Title, TypographyStylesProvider, Container } from '@mantine/core';
+import { AppShell, Badge, Button, Center, SegmentedControl, Loader, Group, Radio, MultiSelect, Select, Space, Text, Title, TypographyStylesProvider, Checkbox, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import { Tabs, rem } from '@mantine/core';
 import { IconPhoto, IconAdjustments, IconClockBolt, IconExclamationMark } from '@tabler/icons-react';
+import { useForm } from '@mantine/form';
+import { type } from '@testing-library/user-event/dist/type';
 
 
 
@@ -18,6 +20,11 @@ function HomePageAuth() {
     const [timeDomain, setTimeDomain] = useState()
     const [selectedValues, setSelectedValues] = useState({
     })
+    const [engineBuildersValues, setEngineBuildersValues] = useState([]);
+    const [barbellMovementsValues, setBarbellMovementsValues] = useState([]);
+    const [advancedMovementsValues, setAdvancedMovementsValues] = useState([]);
+    const [skillMovementsValues, setSkillMovementsValues] = useState([]);
+    const [typeValue, setTypeValue] = useState("Random")
     const iconStyle = { width: rem(12), height: rem(12) };
     const icon = <IconPhoto size={14} />;
 
@@ -35,7 +42,8 @@ function HomePageAuth() {
         if (isAuthenticated && user.email) {
             setLoading(true)
             axios.get('https://uz45ft8e8h.execute-api.us-west-2.amazonaws.com', {
-                params: {},
+                params: {
+                },
                 headers: {
                     'user': JSON.stringify(user),  // Add your custom header here
                 }
@@ -67,6 +75,12 @@ function HomePageAuth() {
         setLoading(true)
         const valuesToSend = selectedValues
         valuesToSend['timeDomain'] = timeDomain
+        valuesToSend['type'] = typeValue;
+        valuesToSend['length'] = timeDomain
+        valuesToSend['barbellMovementsValues'] = barbellMovementsValues.join(',');
+        valuesToSend['advancedMovementsValues'] = advancedMovementsValues.join(',');
+        valuesToSend['engineBuildersValues'] = engineBuildersValues.join(',');
+        valuesToSend['skillMovementsValues'] = skillMovementsValues.join(',');
         axios.get('https://uz45ft8e8h.execute-api.us-west-2.amazonaws.com', {
             params: valuesToSend,
             headers: {
@@ -129,7 +143,6 @@ function HomePageAuth() {
                     {/* This below is the custom create component */}
                     {!data?.workout &&
                         <>
-                            <Text >No workout created. Use options below to generate a desired workout.</Text>
                             <Tabs defaultValue="custom">
                                 <Tabs.List>
                                     <Tabs.Tab value="custom" leftSection={<IconAdjustments style={iconStyle} />}>
@@ -158,34 +171,51 @@ function HomePageAuth() {
                                                 <Radio value="90" label="90" />
                                             </Group>
                                         </Radio.Group>
+                                        <Space h="sm" />
 
-                                        <Text>Optional select any of the options below</Text>
+                                        <SegmentedControl
+                                            data={['Random', 'AMRAP', 'Timed', 'EMOM']}
+                                            value={typeValue}
+                                            onChange={setTypeValue}
 
-                                        <Select
-                                            label="Barbell movements"
-                                            placeholder="Pick value"
+                                        />
+
+                                        <MultiSelect
+                                            label="Barbell Movements"
+                                            placeholder="Pick value up to 3"
+                                            maxValues={3}
+                                            value={barbellMovementsValues} onChange={setBarbellMovementsValues}
                                             data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
-                                            value={selectedValues.Barbell}
-                                            onChange={handleSelectChange('Barbell')}
-                                        />
-                                        <Select
-                                            label="Skills"
-                                            placeholder="Pick value"
-                                            data={['double unders', 'handstand pushups', 'muscle ups', 'handstand walks', 'chest-to-bar pullups']}
-                                            value={selectedValues.Skills}
-                                            onChange={handleSelectChange('Skills')}
                                         />
 
-                                        <Select
-                                            label="Endurance"
-                                            placeholder="Pick value"
-                                            data={['rowing', 'running', 'erg biking', 'burpees', 'wall balls']}
-                                            value={selectedValues.Endurance}
-                                            onChange={handleSelectChange('Endurance')}
+                                        <MultiSelect
+                                            label="Engine Builders"
+                                            placeholder="Pick value up to 3"
+                                            maxValues={3}
+                                            value={engineBuildersValues} onChange={setEngineBuildersValues}
+                                            data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
                                         />
-                                        <Space h="md" />
-                                        <Button variant="filled" color="teal" onClick={() => handleSubmit()}
-                                            disabled={timeDomain ? false : true}>Submit</Button>
+
+                                        <MultiSelect
+                                            label="Skill Movements"
+                                            placeholder="Pick value up to 3"
+                                            maxValues={3}
+                                            value={skillMovementsValues} onChange={setSkillMovementsValues}
+                                            data={['pistol squats', 'chest to bar pullups', 'handstand pushups', 'double-unders']}
+                                        />
+
+                                        <MultiSelect
+                                            label="Advanced Movements"
+                                            value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
+                                            maxValues={3}
+                                            placeholder="Pick value up to 3"
+                                            data={['muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
+
+                                        />
+                                        <Group justify="flex-end" mt="md">
+                                            <Button onClick={event => handleSubmit()} disabled={timeDomain ? false : true}> Submit</Button>
+                                        </Group>
+
                                     </>
                                 </Tabs.Panel>
 
