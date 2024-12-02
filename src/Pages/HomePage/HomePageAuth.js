@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AppShell, Badge, Button, Center, SegmentedControl, Loader, Group, Radio, MultiSelect, Select, Space, Text, Title, TypographyStylesProvider, Checkbox, TextInput } from '@mantine/core';
+import { AppShell, Badge, Button, Center, CheckIcon, SegmentedControl, Loader, Group, Radio, MultiSelect, Select, Space, Text, Title, TypographyStylesProvider, Checkbox, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
@@ -160,10 +160,10 @@ function HomePageAuth() {
                                                 withAsterisk
                                             >
                                                 <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
-                                                    <Radio checked={timeDomain === '10'} value="10" label="10" />
-                                                    <Radio value="30" label="30" />
-                                                    <Radio checked={timeDomain === '60'} value="60" label="60" />
-                                                    <Radio value="90" label="90" />
+                                                    <Radio checked={timeDomain === '10'} value="10" label="10" icon={CheckIcon} />
+                                                    <Radio value="30" label="30" icon={CheckIcon} />
+                                                    <Radio checked={timeDomain === '60'} value="60" label="60" icon={CheckIcon} />
+                                                    <Radio value="90" label="90" icon={CheckIcon} />
                                                 </Group>
                                             </Radio.Group>
                                             <Space h="sm" />
@@ -179,6 +179,7 @@ function HomePageAuth() {
                                                 placeholder="Pick value up to 3 Barbell Movements"
                                                 checkIconPosition="right"
                                                 maxValues={3}
+                                                size="xl"
                                                 searchable
                                                 leftSection={<IconBarbell />}
                                                 nothingFoundMessage="Nothing found..."
@@ -192,6 +193,7 @@ function HomePageAuth() {
                                                 placeholder="Pick value up to 3 Engine Builders"
                                                 checkIconPosition="right"
                                                 leftSection={<IconTreadmill />}
+                                                size="xl"
                                                 maxValues={3}
                                                 searchable
                                                 nothingFoundMessage="Nothing found..."
@@ -205,6 +207,7 @@ function HomePageAuth() {
                                                 placeholder="Pick value up to 3 Skill Movements"
                                                 checkIconPosition="right"
                                                 leftSection={<IconGymnastics />}
+                                                size="xl"
 
                                                 maxValues={3}
                                                 searchable
@@ -220,6 +223,7 @@ function HomePageAuth() {
                                                 maxValues={3}
                                                 checkIconPosition="right"
                                                 leftSection={<IconDeviceVisionProFilled />}
+                                                size="xl"
                                                 searchable
                                                 nothingFoundMessage="Nothing found..."
                                                 placeholder="Pick up to 3 Advanced Movements"
