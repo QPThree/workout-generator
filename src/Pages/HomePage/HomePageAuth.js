@@ -159,11 +159,11 @@ function HomePageAuth() {
                                                 description="This is required before submitting"
                                                 withAsterisk
                                             >
-                                                <Group mt="xs" value={timeDomain} onChange={event => setTimeDomain(event.target.value)}>
-                                                    <Radio checked={timeDomain === '10'} value="10" label="10" icon={CheckIcon} />
-                                                    <Radio value="30" label="30" icon={CheckIcon} />
-                                                    <Radio checked={timeDomain === '60'} value="60" label="60" icon={CheckIcon} />
-                                                    <Radio value="90" label="90" icon={CheckIcon} />
+                                                <Group mt="sm" value={timeDomain} onChange={event => setTimeDomain(event.target.value)} full>
+                                                    <Radio checked={timeDomain === '10'} value="10" label="10" icon={CheckIcon} size="md" />
+                                                    <Radio value="30" label="30" icon={CheckIcon} size="md" />
+                                                    <Radio checked={timeDomain === '60'} value="60" label="60" icon={CheckIcon} size="md" />
+                                                    <Radio value="90" label="90" icon={CheckIcon} size="md" />
                                                 </Group>
                                             </Radio.Group>
                                             <Space h="sm" />
