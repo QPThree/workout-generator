@@ -6,7 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { renderThemeBadges } from '../../utils/helpers'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import { Tabs, rem } from '@mantine/core';
-import { IconAdjustments, IconClockBolt, IconExclamationMark, IconBuildingSkyscraper, IconWeight } from '@tabler/icons-react';
+import { IconAdjustments, IconClockBolt, IconBarbell, IconBuildingSkyscraper, IconWeight, IconGymnastics, IconTreadmill, IconDeviceVisionProFilled } from '@tabler/icons-react';
 
 
 
@@ -173,47 +173,57 @@ function HomePageAuth() {
                                                 onChange={setTypeValue}
                                                 fullWidth
                                             />
+                                            <Space h="md" />
                                             <MultiSelect
-                                                label="Barbell Movements"
-                                                placeholder="Pick value up to 3"
+                                                // label="Barbell Movements"
+                                                placeholder="Pick value up to 3 Barbell Movements"
                                                 checkIconPosition="right"
                                                 maxValues={3}
                                                 searchable
+                                                leftSection={<IconBarbell />}
                                                 nothingFoundMessage="Nothing found..."
                                                 value={barbellMovementsValues} onChange={setBarbellMovementsValues}
                                                 data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges', 'push press']}
                                             />
+                                            <Space h="md" />
 
                                             <MultiSelect
-                                                label="Engine Builders"
-                                                placeholder="Pick value up to 3"
+                                                // label="Engine Builders"
+                                                placeholder="Pick value up to 3 Engine Builders"
                                                 checkIconPosition="right"
+                                                leftSection={<IconTreadmill />}
                                                 maxValues={3}
                                                 searchable
                                                 nothingFoundMessage="Nothing found..."
                                                 value={engineBuildersValues} onChange={setEngineBuildersValues}
                                                 data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
                                             />
+                                            <Space h="md" />
 
                                             <MultiSelect
-                                                label="Skill Movements"
-                                                placeholder="Pick value up to 3"
+                                                // label="Skill Movements"
+                                                placeholder="Pick value up to 3 Skill Movements"
                                                 checkIconPosition="right"
+                                                leftSection={<IconGymnastics />}
+
                                                 maxValues={3}
                                                 searchable
                                                 nothingFoundMessage="Nothing found..."
                                                 value={skillMovementsValues} onChange={setSkillMovementsValues}
                                                 data={['pistol squats', 'chest to bar pullups', 'toes to bar', 'handstand pushups', 'double-unders']}
                                             />
+                                            <Space h="md" />
 
                                             <MultiSelect
-                                                label="Advanced Movements"
+                                                // label="Advanced Movements"
                                                 value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
                                                 maxValues={3}
                                                 checkIconPosition="right"
+                                                leftSection={<IconDeviceVisionProFilled />}
                                                 searchable
                                                 nothingFoundMessage="Nothing found..."
-                                                placeholder="Pick value up to 3"
+                                                placeholder="Pick up to 3 Advanced Movements"
+                                                comboboxProps={{ shadow: 'md' }}
                                                 data={['bar muscle ups', 'ring muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
 
                                             />
