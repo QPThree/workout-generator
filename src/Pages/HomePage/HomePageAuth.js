@@ -172,13 +172,14 @@ function HomePageAuth() {
                                                 value={typeValue}
                                                 onChange={setTypeValue}
                                                 fullWidth
-
                                             />
                                             <MultiSelect
                                                 label="Barbell Movements"
                                                 placeholder="Pick value up to 3"
+                                                checkIconPosition="right"
                                                 maxValues={3}
                                                 searchable
+                                                nothingFoundMessage="Nothing found..."
                                                 value={barbellMovementsValues} onChange={setBarbellMovementsValues}
                                                 data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges', 'push press']}
                                             />
@@ -186,8 +187,10 @@ function HomePageAuth() {
                                             <MultiSelect
                                                 label="Engine Builders"
                                                 placeholder="Pick value up to 3"
+                                                checkIconPosition="right"
                                                 maxValues={3}
                                                 searchable
+                                                nothingFoundMessage="Nothing found..."
                                                 value={engineBuildersValues} onChange={setEngineBuildersValues}
                                                 data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
                                             />
@@ -195,17 +198,21 @@ function HomePageAuth() {
                                             <MultiSelect
                                                 label="Skill Movements"
                                                 placeholder="Pick value up to 3"
+                                                checkIconPosition="right"
                                                 maxValues={3}
                                                 searchable
+                                                nothingFoundMessage="Nothing found..."
                                                 value={skillMovementsValues} onChange={setSkillMovementsValues}
-                                                data={['pistol squats', 'chest to bar pullups', , 'toes to bar', 'handstand pushups', 'double-unders']}
+                                                data={['pistol squats', 'chest to bar pullups', 'toes to bar', 'handstand pushups', 'double-unders']}
                                             />
 
                                             <MultiSelect
                                                 label="Advanced Movements"
                                                 value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
                                                 maxValues={3}
+                                                checkIconPosition="right"
                                                 searchable
+                                                nothingFoundMessage="Nothing found..."
                                                 placeholder="Pick value up to 3"
                                                 data={['bar muscle ups', 'ring muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
 
