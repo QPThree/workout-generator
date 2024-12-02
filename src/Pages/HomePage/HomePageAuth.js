@@ -178,14 +178,16 @@ function HomePageAuth() {
                                                 label="Barbell Movements"
                                                 placeholder="Pick value up to 3"
                                                 maxValues={3}
+                                                searchable
                                                 value={barbellMovementsValues} onChange={setBarbellMovementsValues}
-                                                data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges']}
+                                                data={['deadlifts', 'back squats', 'cleans', 'front-squats', 'snatches', 'over-head squats', 'front-rack lunges', 'push press']}
                                             />
 
                                             <MultiSelect
                                                 label="Engine Builders"
                                                 placeholder="Pick value up to 3"
                                                 maxValues={3}
+                                                searchable
                                                 value={engineBuildersValues} onChange={setEngineBuildersValues}
                                                 data={['running', 'rowing', 'ski erg', 'burpees', 'wall balls', 'box jumps', 'double-unders']}
                                             />
@@ -194,16 +196,18 @@ function HomePageAuth() {
                                                 label="Skill Movements"
                                                 placeholder="Pick value up to 3"
                                                 maxValues={3}
+                                                searchable
                                                 value={skillMovementsValues} onChange={setSkillMovementsValues}
-                                                data={['pistol squats', 'chest to bar pullups', 'handstand pushups', 'double-unders']}
+                                                data={['pistol squats', 'chest to bar pullups', , 'toes to bar', 'handstand pushups', 'double-unders']}
                                             />
 
                                             <MultiSelect
                                                 label="Advanced Movements"
                                                 value={advancedMovementsValues} onChange={setAdvancedMovementsValues}
                                                 maxValues={3}
+                                                searchable
                                                 placeholder="Pick value up to 3"
-                                                data={['muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
+                                                data={['bar muscle ups', 'ring muscle ups', 'handstand walks', 'handstand pushups', 'GHD situps']}
 
                                             />
                                             <Group justify="flex-end" mt="md">
