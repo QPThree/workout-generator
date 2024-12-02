@@ -171,6 +171,7 @@ function HomePageAuth() {
                                                 data={['Random', 'AMRAP', 'Timed', 'EMOM']}
                                                 value={typeValue}
                                                 onChange={setTypeValue}
+                                                fullWidth
 
                                             />
                                             <MultiSelect
